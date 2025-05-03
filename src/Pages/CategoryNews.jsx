@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
+import NewsCard from "../Components/homelayout/NewsCard";
 
 const CategoryNews = () => {
   const { id } = useParams();
@@ -21,7 +22,20 @@ const CategoryNews = () => {
     }
   }, [data, id]);
 
-  return <div>total { categoryNews.length } found</div>;
+  return <>
+    <div>
+      <h2 className="font-bold text-accent">Dragon News Home</h2>
+      <div className="">
+        {
+          categoryNews.map((news) => (
+            
+            <NewsCard news={news} key={news.id}></NewsCard>
+          ))
+        }
+      </div>
+  </div>
+
+  </>;
 };
 
 export default CategoryNews;
