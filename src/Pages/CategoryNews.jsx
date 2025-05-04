@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import NewsCard from "../Components/homelayout/NewsCard";
 
@@ -22,20 +22,22 @@ const CategoryNews = () => {
     }
   }, [data, id]);
 
-  return <>
-    <div>
-      <h2 className="font-bold text-accent">Dragon News Home</h2>
-      <div className="">
-        {
-          categoryNews.map((news) => (
-            
-            <NewsCard news={news} key={news.id}></NewsCard>
-          ))
-        }
-      </div>
-  </div>
-
-  </>;
+  return (
+    <>
+      <Suspense
+        fallback={<span className="loading loading-dots loading-xl"></span>}
+      >
+        <div>
+          <h2 className="font-bold text-accent mb-4">Dragon News Home</h2>
+          <div className="">
+            {categoryNews.map((news) => (
+              <NewsCard news={news} key={news.id}></NewsCard>
+            ))}
+          </div>
+        </div>
+      </Suspense>
+    </>
+  );
 };
 
 export default CategoryNews;
